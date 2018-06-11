@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SiderDemo from './components/Navi/Navi'
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import './style/index.less';
+import MRouter from './routes/index';
 
-ReactDOM.render(<SiderDemo />, document.getElementById('root'));
+import registerServiceWorker from './registerServiceWorker';
+
+
+ReactDOM.render(
+    <MRouter />, document.getElementById('root')
+);
 registerServiceWorker();
