@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input,Button} from 'antd';
-import BreadcrumbCustom from "../common/BreadcrumbCustom";
+import BreadcrumbCustom from "../../components/BreadcrumbCustom";
 import {message} from "antd/lib/index";
 
 const FormItem = Form.Item;

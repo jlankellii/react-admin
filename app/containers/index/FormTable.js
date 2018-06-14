@@ -7,13 +7,7 @@ export default class FormTable extends Component{
         super(props);
     }
     render(){
-        const { checkChange, onDelete, editClick, dataSource, loading } = this.props;
-        const rowSelection = {
-                onChange: checkChange,
-                getCheckboxProps: record => ({
-                disabled: record.name === 'Disabled User', // Column configuration not to be checked
-            }),
-        };
+        const { onDelete, editClick, dataSource, loading } = this.props;
         const columns = [{
             title: '姓名',
             dataIndex: 'name',
@@ -21,12 +15,12 @@ export default class FormTable extends Component{
         }, {
             title: '性别',
             dataIndex: 'sex',
-            onFilter: (value, record) => record.sex.indexOf(value) === 0,
+            // onFilter: (value, record) => record.sex.indexOf(value) === 0,
             width: 80,
         }, {
             title: '年龄',
             dataIndex: 'age',
-            // sorter: (a, b) => a.age - b.age,
+            sorter: (a, b) => a.age - b.age,
             width: 80,
         },{
             title: '地址',
@@ -43,7 +37,7 @@ export default class FormTable extends Component{
         },{
             title: '创建时间',
             dataIndex: 'createtime',
-            // sorter: (a, b) => moment(a.createtime) - moment(b.createtime),
+            sorter: (a, b) => moment(a.createtime) - moment(b.createtime),
             width:150,
         },{
             title: '操作',
@@ -59,7 +53,6 @@ export default class FormTable extends Component{
         }];
         return(
             <Table
-                rowSelection={rowSelection}
                 columns={columns}
                 dataSource={dataSource}
                 bordered={true}

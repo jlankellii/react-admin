@@ -1,5 +1,5 @@
 import { Router, Route, Switch } from 'react-router-dom';
-import history from '../components/common/history';
+import history from '../components/history';
 
 export default function request(method,url,body) {
     method=method.toUpperCase();

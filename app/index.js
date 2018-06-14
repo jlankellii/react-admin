@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style/index.less';
-import MRouter from './routes/index';
+import './static/css/index.less';
+import MRouter from '../app/routes/index';
 
 import registerServiceWorker from './registerServiceWorker';
 

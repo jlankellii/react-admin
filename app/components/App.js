@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {Layout} from 'antd';
-import '../../style/index.less';
+import '../static/css/index.less';
 
 import SiderCustom from './SiderCustom';
 import HeaderCustom from './HeaderCustom';
-import UForm from '../index/Form';
-import Money from '../money/money';
-// import Password from '../password/password';
+import UForm from '../containers/index/Form';
+import Money from '../containers/money/money';
+import Password from '../containers/password/password';
 import noMatch from './404';
 
 const {Content, Footer} = Layout;
@@ -50,7 +50,7 @@ export default class App extends Component {
                         <Switch>
                             <Route exact path={'/app/money'} component={Money} />
                             <Route exact path={'/app'} component={UForm} />
-                            {/*<Route exact path={'/app/password'} component={Password}/>*/}
+                            <Route exact path={'/app/password'} component={Password}/>
                             <Route component={noMatch} />
                         </Switch>
                     </Content>

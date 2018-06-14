@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import BreadcrumbCustom from '../common/BreadcrumbCustom';
-import { Table, Input, Button, Icon,Row,Col,Card } from 'antd';
+import BreadcrumbCustom from '../../components/BreadcrumbCustom';
+import { Table, Button,Row,Col,Card } from 'antd';
 import './money.less'
 const { Meta } = Card;
 
@@ -72,7 +72,7 @@ export default class Money extends Component {
                             <Card className="card-style">
                                 <Meta
                                     className="card-meta"
-                                    avatar={<img src={require('../../style/img/balance.png')} alt=""/>}
+                                    avatar={<img src={require('../../static/images/balance.png')} alt=""/>}
                                     title="余额（元）"
                                     description="10000.00"
                                 />
@@ -83,7 +83,7 @@ export default class Money extends Component {
                             <Card className="card-style">
                                 <Meta
                                     className="card-meta"
-                                    avatar={<img src={require('../../style/img/frozen.png')} alt=""/>}
+                                    avatar={<img src={require('../../static/images/frozen.png')} alt=""/>}
                                     title="冻结资金（元）"
                                     description="10000.00"
                                 />
@@ -94,7 +94,7 @@ export default class Money extends Component {
                             <Card className="card-style">
                                 <Meta
                                     className="card-meta"
-                                    avatar={<img src={require('../../style/img/withdraw.png')} alt=""/>}
+                                    avatar={<img src={require('../../static/images/withdraw.png')} alt=""/>}
                                     title="可提现金额（元）"
                                     description="10000.00"
                                 />

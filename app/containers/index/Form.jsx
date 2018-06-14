@@ -5,12 +5,12 @@ import axios from 'axios';
 import Mock from 'mockjs';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import { Row, Col, Input, Icon, Cascader, DatePicker, Button, Tooltip, Popconfirm } from 'antd';
+import { Row, Col, Input, Icon, Cascader, DatePicker, Button } from 'antd';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
 
 
 
-import BreadcrumbCustom from '../common/BreadcrumbCustom';
+import BreadcrumbCustom from '../../../app/components/BreadcrumbCustom';
 import address from './request/address.json';
 import data from './request/data.json';
 import CollectionCreateForm from './CustomizedForm';
