@@ -41,17 +41,8 @@ class CustomizedForm extends Component{
                 console.log(error);
             });
     }
-    handleWebsiteChange = (value) => {
-        let autoCompleteResult;
-        if (!value) {
-            autoCompleteResult = [];
-        } else {
-            autoCompleteResult = ['.com', '.cn', '.org', '.net'].map(domain => `${value}${domain}`);
-        }
-        this.setState({ autoCompleteResult });
-    };
     render(){
-        const { visible, onCancel, onCreate, form, okText, title } = this.props;
+        const { visible, onCancel, onCreate, form, okText,cancelText, title } = this.props;
         const { getFieldDecorator } = form;
         const { autoCompleteResult } = this.state;
         const FormItemLayout = {
@@ -59,14 +50,12 @@ class CustomizedForm extends Component{
             wrapperCol: { span: 16 },
         };
         const PhoneBefore = <p style={{ width: 40 }}>+86</p>;
-        const websiteOptions = autoCompleteResult.map(website => (
-            <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-        ));
         return (
             <Modal
                 visible={visible}
                 title={title}
                 okText={okText}
+                cancelText={cancelText}
                 onCancel={onCancel}
                 onOk={onCreate}
             >
@@ -99,7 +88,7 @@ class CustomizedForm extends Component{
                         {getFieldDecorator('address', {
                             rules: [{ required: true, message: '请选择地址！' }],
                         })(
-                            <Cascader options={options}/>
+                            <Cascader options={options} placeholder="请选择地址"/>
                         )}
                     </FormItem>
                     <FormItem label="手机号" {...FormItemLayout} hasFeedback>
@@ -122,18 +111,6 @@ class CustomizedForm extends Component{
                             }],
                         })(
                             <Input />
-                        )}
-                    </FormItem>
-                    <FormItem label="网址" {...FormItemLayout} hasFeedback>
-                        {getFieldDecorator('website', {
-                            rules: [{required: true, message: '请输入网址！'}],
-                        })(
-                            <AutoComplete
-                                dataSource={websiteOptions}
-                                onChange={this.handleWebsiteChange}
-                            >
-                                <Input/>
-                            </AutoComplete>
                         )}
                     </FormItem>
                 </Form>

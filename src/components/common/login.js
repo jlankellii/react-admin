@@ -20,9 +20,14 @@ function PatchUser(values) {  //匹配用户
 };
 
 class NormalLoginForm extends Component {
+    constructor(){
+        super();
+        this.handleSubmit=this.handleSubmit.bind(this);
+    }
     state = {
         isLoding:false,
     };
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -33,20 +38,19 @@ class NormalLoginForm extends Component {
                         isLoding: true,
                     });
 
-                    localStorage.setItem('zoie_user',JSON.stringify(values));
-                    message.success('登录成功!'); //成功信息
+                    localStorage.setItem('mspa_user',JSON.stringify(values));
+                    message.success('login successed!'); //成功信息
                     let that = this;
                     setTimeout(function() { //延迟进入
                         that.props.history.push({pathname:'/app',state:values});
                     }, 2000);
 
                 }else{
-                    message.error('登录失败!'); //失败信息
+                    message.error('login failed!'); //失败信息
                 }
             }
         });
     };
-
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
@@ -57,11 +61,14 @@ class NormalLoginForm extends Component {
                             <div className="login-name">J LAN KELL II</div>
                         </div>
                         <Form onSubmit={this.handleSubmit} style={{maxWidth: '300px'}}>
+                            {/*<FormItem  valid={account.valid} error={account.error}>*/}
+                                {/*<input type="text" prefix={<Icon type="user" style={{ fontSize: 13 }} />} value={account.value} onChange={e => onFormChange('account', e.target.value)}/>*/}
+                            {/*</FormItem>*/}
                             <FormItem>
-                                {getFieldDecorator('username', {
-                                    rules: [{ required: true, message: '请输入用户名!' }],
+                                {getFieldDecorator('account',{
+                                    rules:[{required:true,message:'请输入用户名!'}]
                                 })(
-                                    <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="用户名" />
+                                    <Input prefix={<Icon type="user" style={{fontSize:13}}/>} type="text" placeholder="用户名" />
                                 )}
                             </FormItem>
                             <FormItem>
@@ -82,7 +89,6 @@ class NormalLoginForm extends Component {
                                 <Button type="primary" htmlType="submit" className="login-form-button" style={{width: '100%'}}>
                                     登录
                                 </Button>
-                                <a href="">立即注册!</a>
                             </FormItem>
                         </Form>
                     </div>

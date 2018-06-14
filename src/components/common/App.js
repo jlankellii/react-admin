@@ -5,8 +5,9 @@ import '../../style/index.less';
 
 import SiderCustom from './SiderCustom';
 import HeaderCustom from './HeaderCustom';
-import MIndex from '../index/index';
-import UForm from '../form/Form';
+import UForm from '../index/Form';
+import Money from '../money/money';
+// import Password from '../password/password';
 import noMatch from './404';
 
 const {Content, Footer} = Layout;
@@ -47,8 +48,9 @@ export default class App extends Component {
                     <HeaderCustom collapsed={collapsed} toggle={this.toggle} username={name}/>
                     <Content style={{margin: '0 16px'}}>
                         <Switch>
-                            <Route exact path={'/app'} component={MIndex} />
-                            <Route exact path={'/app/form'} component={UForm} />
+                            <Route exact path={'/app/money'} component={Money} />
+                            <Route exact path={'/app'} component={UForm} />
+                            {/*<Route exact path={'/app/password'} component={Password}/>*/}
                             <Route component={noMatch} />
                         </Switch>
                     </Content>

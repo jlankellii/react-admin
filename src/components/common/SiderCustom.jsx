@@ -64,23 +64,20 @@ export default class SiderCustom extends Component{
                     openKeys={firstHide ? null : [openKey]}
                 >
 
-                    <Menu.Item key={"/app/form"}>
-                        <Link to={"/app/form"}><Icon type="home" /><span>首页</span></Link>
-                    </Menu.Item>
                     <Menu.Item key={"/app"}>
-                        <Link to={"/app"}><Icon type="pie-chart" /><span>资金</span></Link>
+                        <Link to={"/app"}><Icon type="home" /><span>首页</span></Link>
+                    </Menu.Item>
+                    <Menu.Item key={"/app/money"}>
+                        <Link to={"/app/money"}><Icon type="pie-chart" /><span>资金</span></Link>
                     </Menu.Item>
                     <SubMenu
                     key="/app/chart"
-                    title={<span><Icon type="area-chart" /><span>设置</span></span>}
+                    title={<span><Icon type="tool" /><span>设置</span></span>}
                     >
-                        <Menu.Item key="/app/chart/echarts">
-                            <Link to={'/app/chart/echarts'}><span>echarts</span></Link>
+                        <Menu.Item key="/app/password">
+                            <Link to={'/app/password'}><span>修改密码</span></Link>
                         </Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="/app/richText">
-                        <Link to={'/app/richText'}><Icon type="edit" /><span>富文本</span></Link>
-                    </Menu.Item>
                 </Menu>
             </Sider>
         )

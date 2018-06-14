@@ -4,7 +4,11 @@ import './form.less';
 import axios from 'axios';
 import Mock from 'mockjs';
 import moment from 'moment';
+import 'moment/locale/zh-cn';
 import { Row, Col, Input, Icon, Cascader, DatePicker, Button, Tooltip, Popconfirm } from 'antd';
+import locale from 'antd/lib/date-picker/locale/zh_CN';
+
+
 
 import BreadcrumbCustom from '../common/BreadcrumbCustom';
 import address from './request/address.json';
@@ -86,7 +90,7 @@ export default class UForm extends Component{
     };
     //用户名搜索
     onSearchUserName = (value) => {
-        // console.log(value);
+        console.log(value);
         const { dataSource } = this.state;
         this.setState({
             dataSource: dataSource.filter(item => item.name.indexOf(value) !== -1),
@@ -124,7 +128,7 @@ export default class UForm extends Component{
         }else{
             this.setState({
                 timeRange: date,
-                dataSource: dataSource.filter(item => (moment(item.createtime.substring(0,10)) <= endtime  && moment(item.createtime.substring(0,10)) >= startime) === true)
+                dataSource: dataSource.filter(item => (moment(item.createtime.substring(0,9)) <= endtime  && moment(item.createtime.substring(0,9)) >= startime) === true)
             });
         }
     };
@@ -157,7 +161,8 @@ export default class UForm extends Component{
         this.getData();
     }
     //搜索按钮
-    btnSearch_Click = () => {
+    btnSearch_Click = (value) => {
+        console.log(value)
 
     };
     //重置按钮
@@ -226,16 +231,15 @@ export default class UForm extends Component{
     editClick = (key) => {
         const form = this.form;
         const { dataSource } = this.state;
-        const index = catchIndex(dataSource, key);
+        console.log(key)
         form.setFieldsValue({
             key: key,
-            name: dataSource[index].name,
-            sex: dataSource[index].sex,
-            age: dataSource[index].age,
-            address: dataSource[index].address.split(' / '),
-            phone: dataSource[index].phone,
-            email: dataSource[index].email,
-            website: dataSource[index].website,
+            name: dataSource[key].name,
+            sex: dataSource[key].sex,
+            age: dataSource[key].age,
+            address: dataSource[key].address.split(' / '),
+            phone: dataSource[key].phone,
+            email: dataSource[key].email
         });
         this.setState({
             visible: true,
@@ -280,10 +284,10 @@ export default class UForm extends Component{
         };
         return(
             <div>
-                <BreadcrumbCustom paths={['首页','表单']}/>
+                <BreadcrumbCustom paths={['首页']}/>
                 <div className='formBody'>
                     <Row gutter={16}>
-                        <Col className="gutter-row" sm={8}>
+                        <Col className="gutter-row" sm={6}>
                             <Search
                                 placeholder="Input Name"
                                 prefix={<Icon type="user" />}
@@ -293,32 +297,25 @@ export default class UForm extends Component{
                                 placeholder="输入用户名"
                             />
                         </Col>
-                        <Col className="gutter-row" sm={8}>
+                        <Col className="gutter-row" sm={6}>
                             <InputGroup compact>
-                                <Cascader style={{ width: '100%' }} options={options} placeholder="Select Address" onChange={this.Cascader_Select} value={address}/>
+                                <Cascader style={{ width: '100%' }} options={options} placeholder="请选择地址" onChange={this.Cascader_Select} value={address}/>
                             </InputGroup>
                         </Col>
                         <Col className="gutter-row" sm={8}>
-                            <RangePicker style={{ width:'100%' }} onChange={this.RangePicker_Select} value={timeRange}/>
+                            <RangePicker style={{ width:'100%' }} onChange={this.RangePicker_Select} value={timeRange} locale={locale}/>
+                        </Col>
+                        <Col className="gutter-row" sm={4}>
+                            <div className='btnOpera'>
+                                <Button type="primary" onClick={this.btnSearch_Click} style={{marginRight:'10px'}}>查询</Button>
+                                <Button type="primary" onClick={this.btnClear_Click} style={{background:'#f8f8f8', color: '#108ee9'}}>重置</Button>
+                            </div>
                         </Col>
                     </Row>
-                    <Row gutter={16}>
+                    <Row gutter={16} style={{marginTop:'1.6rem'}}>
                         <div className='plus' onClick={this.CreateItem}>
-                            <Icon type="plus-circle" />
-                        </div>
-                        <div className='minus'>
-                            <Popconfirm title="确定要批量删除吗?" onConfirm={this.MinusClick}>
-                                <Icon type="minus-circle" />
-                            </Popconfirm>
-                        </div>
-                        <div className='question'>
-                            <Tooltip placement="right" title={questiontxt}>
-                                <Icon type="question-circle" />
-                            </Tooltip>
-                        </div>
-                        <div className='btnOpera'>
-                            <Button type="primary" onClick={this.btnSearch_Click} style={{marginRight:'10px'}}>查询</Button>
-                            <Button type="primary" onClick={this.btnClear_Click} style={{background:'#f8f8f8', color: '#108ee9'}}>重置</Button>
+                            {/*<Icon type="plus-circle" />*/}
+                            <Button type="primary">新建</Button>
                         </div>
                     </Row>
                     <FormTable
@@ -329,8 +326,8 @@ export default class UForm extends Component{
                         loading={loading}
                     />
                     {isUpdate?
-                        <CollectionCreateForm ref={this.saveFormRef} visible={visible} onCancel={this.handleCancel} onCreate={this.handleUpdate} title="修改信息" okText="更新"
-                    /> : <CollectionCreateForm ref={this.saveFormRef} visible={visible} onCancel={this.handleCancel} onCreate={this.handleCreate} title="新建信息" okText="创建"
+                        <CollectionCreateForm ref={this.saveFormRef} visible={visible} onCancel={this.handleCancel} onCreate={this.handleUpdate} title="修改信息" okText="更新" cancelText="取消"
+                    /> : <CollectionCreateForm ref={this.saveFormRef} visible={visible} onCancel={this.handleCancel} onCreate={this.handleCreate} title="新建信息" okText="创建" cancelText="取消"
                     />}
                 </div>
             </div>
